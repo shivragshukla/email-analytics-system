@@ -1,7 +1,9 @@
-import './assets/main.css'
+import './style.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+
+import './axios';
 
 import App from './App.vue'
 import router from './router'
