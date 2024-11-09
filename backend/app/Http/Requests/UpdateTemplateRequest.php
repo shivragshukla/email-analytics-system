@@ -22,8 +22,16 @@ class UpdateTemplateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'content' => 'required|string',
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:templates,name,' . $this->template
+            ],
+            'content' => [
+                'required',
+                'string',
+            ],
         ];
     }
 }
