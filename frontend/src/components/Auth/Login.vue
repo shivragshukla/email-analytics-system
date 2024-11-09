@@ -1,10 +1,18 @@
 <script setup>
-import { ref } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
+import { onMounted, reactive } from "vue";
 
-const form = ref({
+const { errors } = storeToRefs(useAuthStore());
+const { authenticate } = useAuthStore();
+
+const form = reactive({
   email: "",
   password: "",
 });
+
+onMounted(() => (errors.value = {}));
+
 </script>
 <template>
   <section class="bg-[#F4F7FF] py-20 lg:py-[120px]">
@@ -26,8 +34,8 @@ const form = ref({
               md:px-[60px]
             "
           >
-            <div class="mb-10 text-center md:mb-16">Email Analytics Systems </div>
-            <form>
+            <div class="mb-10 text-center md:mb-16">Login</div>
+            <form @submit.prevent="authenticate('login', form)">
               <div class="mb-6">
                 <input
                   type="email"
@@ -48,6 +56,11 @@ const form = ref({
                     focus-visible:shadow-none
                   "
                 />
+                <div v-if="errors.email" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                    errors.email[0]
+                  }}</span>
+                </div>
               </div>
               <div class="mb-6">
                 <input
@@ -69,6 +82,11 @@ const form = ref({
                     focus-visible:shadow-none
                   "
                 />
+                <div v-if="errors.password" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                    errors.password[0]
+                  }}</span>
+                </div>
               </div>
               <div class="mb-10">
                 <button

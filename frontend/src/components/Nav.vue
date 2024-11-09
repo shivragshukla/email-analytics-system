@@ -1,7 +1,7 @@
 <script setup>
-//import { useAuthStore } from "../stores/auth";
+import { useAuthStore } from "../stores/auth";
 
-//const authStore = useAuthStore();
+const authStore = useAuthStore();
 </script>
 <template>
   <nav class="rounded bg-indigo-900 text-white px-2 py-2.5 sm:px-4">
@@ -9,12 +9,7 @@
       class="container mx-auto flex flex-wrap items-center justify-between"
       bis_skin_checked="1"
     >
-        <router-link
-            :to="{ name: 'dashboard' }"
-            class="block rounded py-2 pr-4 pl-3 text-white"
-            aria-current="page"
-            >Home</router-link
-        >
+        Email Analytics Systems
       <button
         data-collapse-toggle="navbar-default"
         type="button"
@@ -62,37 +57,55 @@
             md:mt-0 md:flex-row md:space-x-8 md:text-sm md:font-medium
           "
         >
-            <li>
-              <router-link
-                :to="{ name: 'login' }"
-                class="
-                  block
-                  rounded
-                  py-2
-                  pr-4
-                  pl-3
-                  text-gray-50
-                  hover:bg-gray-700
-                "
-                >Login</router-link
-              >
-            </li>
-            <li>
-              <router-link
-                :to="{ name: 'register' }"
-                class="
-                  block
-                  rounded
-                  py-2
-                  pr-4
-                  pl-3
-                  text-gray-50
-                  hover:bg-gray-700
-                  md:border-0
-                "
-                >Register</router-link
-              >
-            </li>
+            <template v-if="authStore.user">
+                <li>
+                    <router-link
+                    :to="{ name: 'dashboard' }"
+                    class="block rounded py-2 pr-4 pl-3 text-white"
+                    aria-current="page"
+                    >Home</router-link
+                    >
+                </li>
+                <li>
+                    <form @submit.prevent="authStore.logout">
+                        <button class="block rounded py-2 pr-4 pl-3 text-white">Logout</button>
+                    </form>
+                </li>
+            </template>
+            <template v-else>
+                <li>
+                    <router-link
+                        :to="{ name: 'login' }"
+                        class="
+                        block
+                        rounded
+                        py-2
+                        pr-4
+                        pl-3
+                        text-gray-50
+                        hover:bg-gray-700
+                        "
+                        >Login</router-link
+                    >
+                    </li>
+                    <li>
+                    <router-link
+                        :to="{ name: 'register' }"
+                        class="
+                        block
+                        rounded
+                        py-2
+                        pr-4
+                        pl-3
+                        text-gray-50
+                        hover:bg-gray-700
+                        md:border-0
+                        "
+                        >Register</router-link
+                    >
+                    </li>
+            </template>
+            
         </ul>
       </div>
     </div>

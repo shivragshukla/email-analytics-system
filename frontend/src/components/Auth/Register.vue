@@ -1,12 +1,20 @@
 <script setup>
-import { ref } from "vue";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
+import { onMounted, reactive } from "vue";
 
-const form = ref({
+const { errors } = storeToRefs(useAuthStore());
+const { authenticate } = useAuthStore();
+
+const form = reactive({
   name: "",
   email: "",
   password: "",
   password_confirmation: "",
 });
+
+onMounted(() => (errors.value = {}));
+
 </script>
 <template>
   <!-- ====== Forms Section Start -->
@@ -29,8 +37,8 @@ const form = ref({
               md:px-[60px]
             "
           >
-            <div class="mb-10 text-center md:mb-16">Email Analytics Systems</div>
-            <form>
+            <div class="mb-10 text-center md:mb-16">Registration</div>
+            <form @submit.prevent="authenticate('register', form)">
               <div class="mb-6">
                 <input
                   type="text"
@@ -51,6 +59,11 @@ const form = ref({
                     focus-visible:shadow-none
                   "
                 />
+                <div v-if="errors.name" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                    errors.name[0]
+                  }}</span>
+                </div>
               </div>
               <div class="mb-6">
                 <input
@@ -72,6 +85,11 @@ const form = ref({
                     focus-visible:shadow-none
                   "
                 />
+                <div v-if="errors.email" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                    errors.email[0]
+                  }}</span>
+                </div>
               </div>
               <div class="mb-6">
                 <input
@@ -93,6 +111,11 @@ const form = ref({
                     focus-visible:shadow-none
                   "
                 />
+                <div v-if="errors.password" class="flex">
+                  <span class="text-red-400 text-sm m-2 p-2">{{
+                    errors.password[0]
+                  }}</span>
+                </div>
               </div>
               <div class="mb-6">
                 <input
@@ -134,7 +157,7 @@ const form = ref({
             </form>
             <p class="text-base text-[#adadad]">
               <router-link :to="{ name: 'login' }" class="text-primary hover:underline">
-                Sign In
+                Login In
               </router-link>
             </p>
           </div>
