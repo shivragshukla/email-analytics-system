@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('campaign_id')->constrained()->onDelete('cascade');
             $table->string('recipient_email');
             $table->enum('status', ['sent', 'delivered', 'opened'])->default('sent');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });
     }

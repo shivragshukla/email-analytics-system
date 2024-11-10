@@ -9,7 +9,7 @@ class EloquentTemplateRepository implements TemplateRepositoryInterface
 {
     public function all()
     {
-        return Template::all();
+        return Template->where('user_id', auth()->user()->id)->get();
     }
 
     public function findById($id)
@@ -19,6 +19,7 @@ class EloquentTemplateRepository implements TemplateRepositoryInterface
 
     public function create(array $data)
     {
+        $data['user_id'] = auth()->user()->id;
         return Template::create($data);
     }
 
@@ -31,6 +32,7 @@ class EloquentTemplateRepository implements TemplateRepositoryInterface
 
     public function delete($id)
     {
-        Template::destroy($id);
+        $template = Template::findOrFail($id);
+        $template->delete($id);
     }
 }

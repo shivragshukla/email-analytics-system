@@ -7,7 +7,6 @@ use App\Http\Requests\EmailStatusRequest;
 
 class EmailStatusController extends Controller
 {
-
     protected $emailStatusRepository;
 
     public function __construct(EmailStatusRepositoryInterface $emailStatusRepository)

@@ -4,17 +4,19 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
+
 use App\Repositories\Interfaces\{
     TemplateRepositoryInterface,
     CampaignRepositoryInterface,
-    EmailStatusRepositoryInterface
+    EmailStatusRepositoryInterface,
+    WebhookRepositoryInterface
 };
 use App\Repositories\Eloquent\{
     EloquentTemplateRepository,
     EloquentCampaignRepository,
-    EloquentEmailStatusRepository
+    EloquentEmailStatusRepository,
+    EloquentWebhookRepository
 };
-
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(TemplateRepositoryInterface::class, EloquentTemplateRepository::class);
         $this->app->bind(CampaignRepositoryInterface::class, EloquentCampaignRepository::class);
         $this->app->bind(EmailStatusRepositoryInterface::class, EloquentEmailStatusRepository::class);
+        $this->app->bind(WebhookRepositoryInterface::class, EloquentWebhookRepository::class);
 
     }
 

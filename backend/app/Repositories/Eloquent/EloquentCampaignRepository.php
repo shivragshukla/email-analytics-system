@@ -9,7 +9,7 @@ class EloquentCampaignRepository implements CampaignRepositoryInterface
 {
     public function all()
     {
-        return Campaign::with('template')->get();
+        return Campaign::with('template')->where('user_id', auth()->user()->id)->get();
     }
 
     public function findById($id)
@@ -19,6 +19,7 @@ class EloquentCampaignRepository implements CampaignRepositoryInterface
 
     public function create(array $data)
     {
+        $data['user_id'] = auth()->user()->id;
         $campaign = Campaign::create($data);
         return Campaign::with('template')->findOrFail($campaign->id);
     }
@@ -32,6 +33,7 @@ class EloquentCampaignRepository implements CampaignRepositoryInterface
 
     public function delete($id)
     {
-        Campaign::destroy($id);
+        $campaign = Campaign::findOrFail($id);
+        $campaign->delete($id);
     }
 }

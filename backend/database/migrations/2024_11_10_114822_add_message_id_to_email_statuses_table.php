@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('templates', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->text('content');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->timestamps();
+        Schema::table('email_statuses', function (Blueprint $table) {
+            $table->string('message_id')->unique()->nullable()->after('recipient_email');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('templates');
+        Schema::table('email_statuses', function (Blueprint $table) {
+            $table->dropColumn('message_id');
+        });
     }
 };

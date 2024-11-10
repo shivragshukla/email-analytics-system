@@ -26,14 +26,18 @@ class SendCampaignEmailJob implements ShouldQueue
 
     public function handle()
     {
-        // Send the email
-        Mail::to($this->recipientEmail)->send(new CampaignMail($this->campaign, $this->campaign->template));
+        // Create a new instance of CampaignMail
+        $mail = new CampaignMail($this->campaign, $this->campaign->template);
 
-        // Update email status to "delivered"
+       // Store EmailStatus with message_id
         EmailStatus::create([
             'campaign_id' => $this->campaign->id,
             'recipient_email' => $this->recipientEmail,
-            'status' => 'delivered',
+            'message_id' => $mail->messageId,
+            'user_id' => auth()->user()->id
         ]);
+
+        // Send the email
+        Mail::to($this->recipientEmail)->send($mail);
     }
 }

@@ -9,7 +9,7 @@ class EmailStatus extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['campaign_id', 'recipient_email', 'status'];
+    protected $fillable = ['campaign_id', 'recipient_email', 'status', 'message_id'];
 
     public function campaign()
     {
