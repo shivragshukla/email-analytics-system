@@ -57,6 +57,6 @@ class TemplateController extends Controller
     public function destroy(int $id)
     {
         $this->templateRepository->delete($id);
-        return response()->noContent();
+        return response()->json(['message' => 'Template deleted successfully.']);
     }
 }

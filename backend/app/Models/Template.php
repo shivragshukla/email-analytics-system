@@ -11,4 +11,9 @@ class Template extends Model
 
     protected $fillable = ['name', 'content'];
 
+    public function campaigns()
+    {
+        return $this->hasMany(Campaign::class);
+    }
+
 }

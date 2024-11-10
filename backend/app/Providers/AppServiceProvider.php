@@ -4,8 +4,14 @@ namespace App\Providers;
 
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Interfaces\TemplateRepositoryInterface;
-use App\Repositories\Eloquent\EloquentTemplateRepository;
+use App\Repositories\Interfaces\{
+    TemplateRepositoryInterface,
+    CampaignRepositoryInterface
+};
+use App\Repositories\Eloquent\{
+    EloquentTemplateRepository,
+    EloquentCampaignRepository
+};
 
 
 class AppServiceProvider extends ServiceProvider
@@ -16,6 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(TemplateRepositoryInterface::class, EloquentTemplateRepository::class);
+        $this->app->bind(CampaignRepositoryInterface::class, EloquentCampaignRepository::class);
 
     }
 
