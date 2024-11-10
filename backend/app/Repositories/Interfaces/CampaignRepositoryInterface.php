@@ -2,8 +2,6 @@
 
 namespace App\Repositories\Interfaces;
 
-use App\Models\Template;
-
 interface CampaignRepositoryInterface
 {
     public function all();

@@ -6,7 +6,6 @@ use App\Repositories\Interfaces\CampaignRepositoryInterface;
 use App\Http\Requests\StoreCampaignRequest;
 use App\Http\Requests\UpdateCampaignRequest;
 use App\Http\Resources\CampaignResource;
-use App\Models\Campaign;
 
 class CampaignController extends Controller
 {

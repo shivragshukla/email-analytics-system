@@ -4,7 +4,6 @@ namespace App\Repositories\Eloquent;
 
 use App\Models\Campaign;
 use App\Repositories\Interfaces\CampaignRepositoryInterface;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class EloquentCampaignRepository implements CampaignRepositoryInterface
 {

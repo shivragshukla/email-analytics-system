@@ -21,4 +21,9 @@ class Campaign extends Model
     {
         return $this->belongsTo(Template::class);
     }
+    
+    public function emailStatuses()
+    {
+        return $this->hasMany(EmailStatus::class);
+    }
 }
