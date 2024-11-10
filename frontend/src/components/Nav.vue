@@ -75,6 +75,14 @@ const authStore = useAuthStore();
                     >
                 </li>
                 <li>
+                    <router-link
+                    :to="{ name: 'campaigns' }"
+                    class="block rounded py-2 pr-4 pl-3 text-white"
+                    aria-current="page"
+                    >Campaigns</router-link
+                    >
+                </li>
+                <li>
                     <form @submit.prevent="authStore.logout">
                         <button class="block rounded py-2 pr-4 pl-3 text-white">Logout</button>
                     </form>

@@ -1,21 +1,21 @@
 import axios from 'axios';
 
-const API_URL = '/api/templates';
+const API_URL = '/api/campaigns';
 
 export default {
-  getTemplates() {
+  getCampaigns() {
     return axios.get(API_URL);
   },
-  getTemplate(id) {
+  getCampaign(id) {
     return axios.get(`${API_URL}/${id}`);
   },
-  createTemplate(data) {
+  createCampaign(data) {
     return axios.post(API_URL, data);
   },
-  updateTemplate(id, data) {
+  updateCampaign(id, data) {
     return axios.put(`${API_URL}/${id}`, data);
   },
-  deleteTemplate(id) {
+  deleteCampaign(id) {
     return axios.delete(`${API_URL}/${id}`);
   },
 };

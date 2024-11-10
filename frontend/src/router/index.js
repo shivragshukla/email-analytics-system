@@ -4,6 +4,7 @@ import Login from '@/components/Auth/Login.vue'
 import Register from '@/components/Auth/Register.vue'
 import { useAuthStore } from "@/stores/auth";
 import TemplateList from '@/components/TemplateList.vue';
+import CampaignList from '@/components/CampaignList.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,6 +35,12 @@ const router = createRouter({
       path: '/templates',
       name: 'templates',
       component: TemplateList,
+      meta: { auth: true },
+    },
+    {
+      path: '/campaigns',
+      name: 'campaigns',
+      component: CampaignList,
       meta: { auth: true },
     },
   ],

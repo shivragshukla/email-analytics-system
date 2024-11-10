@@ -1,4 +1,6 @@
+import AuthService from "@/services/AuthService";
 import { defineStore } from "pinia";
+import axios from 'axios';
 
 export const useAuthStore = defineStore("authStore", {
   state: () => {
@@ -8,54 +10,50 @@ export const useAuthStore = defineStore("authStore", {
     };
   },
   actions: {
+    
     /******************* Get authenticated user *******************/
     async getUser() {
       if (localStorage.getItem("token")) {
-        const res = await fetch("/api/user", {
-          headers: {
-            authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        });
-        const data = await res.json();
-        if (res.ok) {
-          this.user = data;
+        try {
+          const response = await AuthService.getUser();
+          this.user = response.data;
+          console.log(response)
+        } catch (error) {
+          console.error(error);
         }
       }
     },
+
     /******************* Login or Register user *******************/
     async authenticate(apiRoute, formData) {
-      const res = await fetch(`/api/${apiRoute}`, {
-        method: "post",
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-      if (data.errors) {
-        this.errors = data.errors;
-      } else {
-        this.errors = {};
-        localStorage.setItem("token", data.token);
-        this.user = data.user;
-        this.router.push({ name: "dashboard" });
+      try {
+        const response = await AuthService.authenticate(apiRoute, formData);
+        if (response.data.errors) {
+          this.errors = response.data.errors;
+        } else {
+          this.errors = {};
+          localStorage.setItem("token", response.data.token);
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`;
+          this.user = response.data.user;
+          this.router.push({ name: "dashboard" });
+        }
+      } catch (error) {
+        this.errors = error.response?.data?.errors
+        console.error(error);
       }
     },
     /******************* Logout user *******************/
     async logout() {
-      const res = await fetch("/api/logout", {
-        method: "post",
-        headers: {
-          authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      });
-
-      const data = await res.json();
-      console.log(data);
-
-      if (res.ok) {
+      try {
+        const response = await AuthService.logout();
         this.user = null;
         this.errors = {};
         localStorage.removeItem("token");
+        axios.defaults.headers.common['Authorization'] = `Bearer ${null}`;
         this.router.push({ name: "login" });
+        console.log(response)
+      } catch (error) {
+        console.error(error);
       }
     },
   },
