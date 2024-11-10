@@ -20,14 +20,15 @@ class EloquentCampaignRepository implements CampaignRepositoryInterface
 
     public function create(array $data)
     {
-        return Campaign::create($data);
+        $campaign = Campaign::create($data);
+        return Campaign::with('template')->findOrFail($campaign->id);
     }
 
     public function update($id, array $data)
     {
-        $template = Campaign::findOrFail($id);
-        $template->update($data);
-        return $template;
+        $campaign = Campaign::with('template')->findOrFail($id);
+        $campaign->update($data);
+        return $campaign;
     }
 
     public function delete($id)

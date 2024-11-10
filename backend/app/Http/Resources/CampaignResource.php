@@ -20,6 +20,7 @@ class CampaignResource extends JsonResource
             'subject' => $this->subject,
             'from_name' => $this->from_name,
             'from_address' => $this->from_address,
+            'template_id' => $this->template_id,
             'template' => new TemplateResource($this->whenLoaded('template')),
         ];
     }
