@@ -5,6 +5,7 @@ import Register from '@/components/Auth/Register.vue'
 import { useAuthStore } from "@/stores/auth";
 import TemplateList from '@/components/TemplateList.vue';
 import CampaignList from '@/components/CampaignList.vue';
+import SendEmail from '@/components/SendEmail.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -41,6 +42,12 @@ const router = createRouter({
       path: '/campaigns',
       name: 'campaigns',
       component: CampaignList,
+      meta: { auth: true },
+    },
+    {
+      path: '/send-email',
+      name: 'send-email',
+      component: SendEmail,
       meta: { auth: true },
     },
   ],

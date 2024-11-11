@@ -2,6 +2,10 @@
     <div class="container mx-auto p-6">
       <h1 class="text-2xl font-bold mb-4">Campaigns</h1>
       <button @click="openModalForCreate" class="bg-blue-500 text-white px-4 py-2 rounded mb-4">Add New Campaign</button>
+      
+        <router-link :to="{ name: 'send-email' }" class="ml-2 border  px-4 py-2 rounded mb-4" >
+            Send Mail
+        </router-link>
   
       <!-- Modal Component -->
       <Modal
@@ -110,8 +114,8 @@ export default {
 
     const { fetchCampaigns, createCampaign, updateCampaign, deleteCampaign } = campaignStore;
     const { fetchTemplates } = templateStore;
-    const { campaigns, errors } = storeToRefs (useCampaignStore());
-    const { templates } = storeToRefs (useTemplateStore());
+    const { campaigns, errors } = storeToRefs(useCampaignStore());
+    const { templates } = storeToRefs(useTemplateStore());
 
     const isModalOpen = ref(false);
     const modalTitle = ref('');

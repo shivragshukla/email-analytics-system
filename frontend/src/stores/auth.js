@@ -10,14 +10,13 @@ export const useAuthStore = defineStore("authStore", {
     };
   },
   actions: {
-    
+
     /******************* Get authenticated user *******************/
     async getUser() {
       if (localStorage.getItem("token")) {
         try {
           const response = await AuthService.getUser();
           this.user = response.data;
-          console.log(response)
         } catch (error) {
           console.error(error);
         }
@@ -51,7 +50,6 @@ export const useAuthStore = defineStore("authStore", {
         localStorage.removeItem("token");
         axios.defaults.headers.common['Authorization'] = `Bearer ${null}`;
         this.router.push({ name: "login" });
-        console.log(response)
       } catch (error) {
         console.error(error);
       }

@@ -44,7 +44,7 @@
           <tbody>
             <tr v-for="template in templates" :key="template.id" class="border-b">
               <td class="px-4 py-2">{{ template.name }}</td>
-              <td class="px-4 py-2">{{ template.content }}</td>
+              <td class="px-4 py-2" v-html="template.content"></td>
               <td class="px-4 py-2 text-center">
                 <button @click="openModalForEdit(template)" class="bg-yellow-400 text-white px-2 py-1 rounded hover:bg-yellow-500">Edit</button>
                 <button @click="deleteTemplate(template.id)" class="bg-red-500 text-white px-2 py-1 rounded hover:bg-red-600 ml-2">Delete</button>
