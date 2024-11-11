@@ -34,7 +34,7 @@ class SendCampaignEmailJob implements ShouldQueue
             'campaign_id' => $this->campaign->id,
             'recipient_email' => $this->recipientEmail,
             'message_id' => $mail->messageId,
-            'user_id' => auth()->user()->id
+            'user_id' => $this->campaign->user_id
         ]);
 
         // Send the email

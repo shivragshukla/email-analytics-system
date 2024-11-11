@@ -9,7 +9,7 @@ class EloquentTemplateRepository implements TemplateRepositoryInterface
 {
     public function all()
     {
-        return Template->where('user_id', auth()->user()->id)->get();
+        return Template::where('user_id', auth()->user()->id)->get();
     }
 
     public function findById($id)

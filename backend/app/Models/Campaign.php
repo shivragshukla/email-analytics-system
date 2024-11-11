@@ -14,6 +14,7 @@ class Campaign extends Model
         'subject',
         'from_name',
         'from_address',
+        'user_id',
         'template_id',
     ];
 
@@ -21,7 +22,7 @@ class Campaign extends Model
     {
         return $this->belongsTo(Template::class);
     }
-    
+
     public function emailStatuses()
     {
         return $this->hasMany(EmailStatus::class);
