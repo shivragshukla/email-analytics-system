@@ -6,6 +6,7 @@ use App\Http\Controllers\{
     CampaignController,
     EmailStatusController,
     WebhookController,
+    CampaignMetricController
 };
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,8 @@ Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::apiResource('templates', TemplateController::class);
     Route::apiResource('campaigns', CampaignController::class);
     Route::post('campaigns/{campaign}/send', EmailStatusController::class);
+    Route::get('report/campaign-metrics', [CampaignMetricController::class, 'index']);
+    Route::get('report/campaign-metrics/{campaign}', [CampaignMetricController::class, 'show']);
 });
 
 Route::post('/email/webhook', WebhookController::class);

@@ -9,13 +9,15 @@ use App\Repositories\Interfaces\{
     TemplateRepositoryInterface,
     CampaignRepositoryInterface,
     EmailStatusRepositoryInterface,
-    WebhookRepositoryInterface
+    WebhookRepositoryInterface,
+    CampaignMetricRepositoryInterface
 };
 use App\Repositories\Eloquent\{
     EloquentTemplateRepository,
     EloquentCampaignRepository,
     EloquentEmailStatusRepository,
-    EloquentWebhookRepository
+    EloquentWebhookRepository,
+    EloquentCampaignMetricRepository
 };
 
 class AppServiceProvider extends ServiceProvider
@@ -29,6 +31,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CampaignRepositoryInterface::class, EloquentCampaignRepository::class);
         $this->app->bind(EmailStatusRepositoryInterface::class, EloquentEmailStatusRepository::class);
         $this->app->bind(WebhookRepositoryInterface::class, EloquentWebhookRepository::class);
+        $this->app->bind(CampaignMetricRepositoryInterface::class, EloquentCampaignMetricRepository::class);
 
     }
 
